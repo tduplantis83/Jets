@@ -1,6 +1,6 @@
 package com.skilldistillery.jets;
 
-//import java.io.*;
+import java.io.*;
 import java.util.*;
 
 public class AirField {
@@ -107,26 +107,35 @@ public class AirField {
 			}
 		}
 	}
+	
+	public void save(String fileName) throws FileNotFoundException {
+        PrintWriter pw = new PrintWriter(new FileOutputStream(fileName));
+        for (Jet jet : jets) {
+            pw.println(jet.getModel() + ", " + jet.getSpeed() + ", " + jet.getRange() + ", " + jet.getPrice());
+        }
+        pw.close();
+    }
 
-//	public void saveFleet(PrintWriter pw, FileWriter fw) {
-//		try {
-//			fw = new FileWriter("jetFleetOutput.txt");
-//			pw = new PrintWriter(fw);
-//		} catch (IOException err) {
-//			System.out.println("Sorry, I can't open 'jetFleetOutput.txt' for writing.");
-//			System.out.println("Maybe the file already exists and is read-only?");
-//			pw = null;
-//			fw = null;
-//		}
-//		
-//		String fileContent = "";
-//		for (Jet j : jets) {
-//			fileContent += j.getModel() + ", " + j.getSpeed() + ", " + j.getRange() + ", " + j.getPrice() 
-//			+ ", " + j.getJetType() + "\n";
-//		}
-//		
-//		pw.print(fileContent);
-//		
-//		
-//	}
+	public void saveFleet(PrintWriter pw, FileOutputStream fos) throws FileNotFoundException{
+		try {
+			pw = new PrintWriter(fos = new FileOutputStream("jetFleet.txt"));
+			
+			for (Jet j : jets) {
+				pw.println(j.getModel() + ", " + j.getSpeed() + ", " + j.getRange() + ", " + j.getPrice() 
+				+ ", " + j.getJetType());
+			}
+			
+			System.out.println("Fleet successfully saved to 'jetFleet.txt'\n");
+			
+			pw.close();
+			fos.close();
+			
+		} catch (IOException err) {
+			System.out.println("Sorry, I can't open 'jetFleet.txt' for writing.");
+			System.out.println("Maybe the file already exists and is read-only?");
+			pw = null;
+		}
+		
+		
+	}
 }

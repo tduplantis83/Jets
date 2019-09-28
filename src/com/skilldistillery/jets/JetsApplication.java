@@ -6,9 +6,9 @@ import java.io.*;
 public class JetsApplication {
 	private AirField airField = new AirField();
 	private Scanner input = new Scanner(System.in);
-//	private PrintWriter pw;
-//	private FileWriter fw;
-
+	private PrintWriter pw;
+	private FileOutputStream fos;
+	
 	public JetsApplication() {
 
 	}
@@ -35,8 +35,6 @@ public class JetsApplication {
 		
 		
 		input.close();
-//		pw.close();
-//		fw.close();
 
 	}
 
@@ -52,13 +50,13 @@ public class JetsApplication {
 		System.out.println("\t7. Dogfight!!!!");
 		System.out.println("\t8. Add a Jet to the Fleet");
 		System.out.println("\t9. Remove a Jet from the Fleet");
-//		System.out.println("\tS. Save Jet Fleet to a txt file");
+		System.out.println("\tS. Save Jet Fleet to a txt file");
 		System.out.println("\tQ. Quit");
 		System.out.println("*********************************************");
 
 	}
 
-	private boolean getUserMenuChoice() {
+	private boolean getUserMenuChoice() throws FileNotFoundException {
 		char choice = input.next().charAt(0);
 		switch (choice) {
 		case '1':
@@ -98,11 +96,11 @@ public class JetsApplication {
 			printJets();
 			airField.removeJet(input);
 			return true;
-//		case 's':
-//		case 'S':
-//			System.out.println("Saving Current Fleet to jetFleetOutput.txt...");
-//			airField.saveFleet(pw, fw);
-//			return true;
+		case 's':
+		case 'S':
+			System.out.println("Saving Current Fleet to jetFleet.txt...");
+			airField.saveFleet(pw, fos);
+			return true;
 		case 'q':
 		case 'Q':
 			System.out.println("Quitting Application - Fly Safe!");
@@ -137,35 +135,9 @@ public class JetsApplication {
 				// index 3 = cost
 				// index 4 = type flag
 				jet = fileInput.split(", ");
-
-				// cargo plane
-				if (jet[4].charAt(0) == 'C') {
-					// create a new jet
-					CargoJet j = new CargoJet(jet[0], Double.parseDouble(jet[1]), Integer.parseInt(jet[2]),
-							Long.parseLong(jet[3]), (jet[4].charAt(0)));
-
-					// add the jet an ArrayList of jets
-					airField.setJets(j);
-
-				}
-				// fighter plane
-				else if (jet[4].charAt(0) == 'F') {
-					FighterJet j = new FighterJet(jet[0], Double.parseDouble(jet[1]), Integer.parseInt(jet[2]),
-							Long.parseLong(jet[3]), (jet[4].charAt(0)));
-
-					// add the jet an ArrayList of jets
-					airField.setJets(j);
-				}
-				// passenger plane
-				else if (jet[4].charAt(0) == 'P') {
-					PassengerJet j = new PassengerJet(jet[0], Double.parseDouble(jet[1]), Integer.parseInt(jet[2]),
-							Long.parseLong(jet[3]), (jet[4].charAt(0)));
-
-					// add the jet an ArrayList of jets
-					airField.setJets(j);
-				} else {
-					System.err.println("ERROR - Invalid Jet Type!");
-				}
+				
+				//method to create jet based upon type
+				createJet(jet);
 
 			}
 			br.close();
@@ -174,64 +146,61 @@ public class JetsApplication {
 		}
 	}
 
-	private void addJet() {
-		char type;
-		
-		do {
-		System.out.println("*********Create a new jet********");
-		System.out.println("Which type of Jet: ");
-		System.out.println("F = Fighter");
-		System.out.println("C = Cargo");
-		System.out.println("P = Passenger");
-		type = input.next().toUpperCase().charAt(0);
-		input.nextLine();
-		if(type == 'C' || type == 'F' || type == 'P')
-		{
-			break;
-		}
-		else {
-			System.err.println("ERROR - Invalid Aircraft Type. F/C/P ONLY. Try again.");
-		}
-		} while(true);
-
-		System.out.print("Enter Model: ");
-		String model = input.nextLine();
-
-		System.out.print("Enter Speed: ");
-		double speed = input.nextDouble();
-
-		System.out.print("Enter Range: ");
-		int range = input.nextInt();
-		
-		System.out.print("Enter Price: ");
-		long price = input.nextLong();
-		
+	private void createJet(String[] jet) {
 		// cargo plane
-		if (type == 'C') {
+		if (jet[4].charAt(0) == 'C') {
 			// create a new jet
-			CargoJet j = new CargoJet(model, speed, range,
-					price, type);
+			CargoJet j = new CargoJet(jet[0], Double.parseDouble(jet[1]), Integer.parseInt(jet[2]),
+					Long.parseLong(jet[3]), (jet[4].charAt(0)));
 
 			// add the jet an ArrayList of jets
 			airField.setJets(j);
 
 		}
 		// fighter plane
-		else if (type == 'F') {
-			FighterJet j = new FighterJet(model, speed, range,
-					price, type);
+		else if (jet[4].charAt(0) == 'F') {
+			FighterJet j = new FighterJet(jet[0], Double.parseDouble(jet[1]), Integer.parseInt(jet[2]),
+					Long.parseLong(jet[3]), (jet[4].charAt(0)));
 
 			// add the jet an ArrayList of jets
 			airField.setJets(j);
 		}
 		// passenger plane
-		else if (type == 'P') {
-			PassengerJet j = new PassengerJet(model, speed, range,
-					price, type);
+		else if (jet[4].charAt(0) == 'P') {
+			PassengerJet j = new PassengerJet(jet[0], Double.parseDouble(jet[1]), Integer.parseInt(jet[2]),
+					Long.parseLong(jet[3]), (jet[4].charAt(0)));
 
 			// add the jet an ArrayList of jets
 			airField.setJets(j);
+		} else {
+			System.err.println("ERROR - Invalid Jet Type!");
 		}
+	}
+
+	private void addJet() {
+		String [] jet = new String[5];
+		
+		System.out.println("*********Create a new jet********");
+		System.out.println("Which type of Jet: ");
+		System.out.println("F = Fighter");
+		System.out.println("C = Cargo");
+		System.out.println("P = Passenger");
+		jet[4] = input.next();
+		input.nextLine();
+
+		System.out.print("Enter Model: ");
+		jet[0] = input.nextLine();
+
+		System.out.print("Enter Speed: ");
+		jet[1]= input.nextLine();
+
+		System.out.print("Enter Range: ");
+		jet[2] = input.nextLine();
+		
+		System.out.print("Enter Price: ");
+		jet[3] = input.nextLine();
+		
+		createJet(jet);
 
 	}
 
