@@ -6,19 +6,21 @@ import java.io.*;
 public class JetsApplication {
 	private AirField airField = new AirField();
 	private Scanner input = new Scanner(System.in);
+//	private PrintWriter pw;
+//	private FileWriter fw;
 
 	public JetsApplication() {
 
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException{
 		JetsApplication ja = new JetsApplication();
 
 		ja.launch();
-
+	
 	}
 
-	private void launch() {
+	private void launch() throws IOException {
 
 		// import jets from file
 		// create jets based on type
@@ -30,8 +32,12 @@ public class JetsApplication {
 		do {
 			displayUserMenu();
 		} while (getUserMenuChoice());
-
+		
+		
 		input.close();
+//		pw.close();
+//		fw.close();
+
 	}
 
 	private void displayUserMenu() {
@@ -42,10 +48,12 @@ public class JetsApplication {
 		System.out.println("\t3. View Fastest Jet");
 		System.out.println("\t4. View Jet with Longest Range");
 		System.out.println("\t5. Load all Cargo Jets");
-		System.out.println("\t6. Dogfight!!!!");
-		System.out.println("\t7. Add a Jet to the Fleet");
-		System.out.println("\t8. Remove a Jet from the Fleet");
-		System.out.println("\t9. Quit");
+		System.out.println("\t6. Load all Passenger Jets");
+		System.out.println("\t7. Dogfight!!!!");
+		System.out.println("\t8. Add a Jet to the Fleet");
+		System.out.println("\t9. Remove a Jet from the Fleet");
+//		System.out.println("\tS. Save Jet Fleet to a txt file");
+		System.out.println("\tQ. Quit");
 		System.out.println("*********************************************");
 
 	}
@@ -54,10 +62,7 @@ public class JetsApplication {
 		char choice = input.next().charAt(0);
 		switch (choice) {
 		case '1':
-			System.out.println("Listing Fleet...");
-			for (Jet j : airField.getJets()) {
-				System.out.println(j);
-			}
+			printJets();
 			return true;
 		case '2':
 			System.out.println("Flying All Jets...");
@@ -78,19 +83,28 @@ public class JetsApplication {
 			airField.loadCargoJets();
 			return true;
 		case '6':
-			airField.dogFight();
+			System.out.println("Loading Passenger Jets...");
+			airField.loadPassengerJets();
 			return true;
 		case '7':
+			airField.dogFight();
+			return true;
+		case '8':
 			System.out.println("Adding Jet...");
 			addJet();
 			return true;
-		case '8':
-			System.out.println("Removing Jet from Fleet...");
-			//PRINT OUT ALL JETS WITH NUMBERS NEXT TO THEM
-			//USER SELECT A NUMBER (INT + 1)
-			//REMOVE THAT INDEX
-			return true;
 		case '9':
+			System.out.println("Remove a Jet from the Fleet...");
+			printJets();
+			airField.removeJet(input);
+			return true;
+		case 's':
+		case 'S':
+			System.out.println("Saving Current Fleet to jetFleetOutput.txt...");
+			airField.saveFleet(pw, fw);
+			return true;
+		case 'q':
+		case 'Q':
 			System.out.println("Quitting Application - Fly Safe!");
 			return false;
 		default:
@@ -98,6 +112,14 @@ public class JetsApplication {
 			return true;
 		}
 
+	}
+
+	private void printJets() {
+		System.out.println("Below are all of the jets currently in the fleet:");
+
+		for (Jet j : airField.getJets()) {
+			System.out.println(j);
+		}
 	}
 
 	private void importJetsFromTxtFile() {
@@ -153,12 +175,24 @@ public class JetsApplication {
 	}
 
 	private void addJet() {
+		char type;
+		
+		do {
 		System.out.println("*********Create a new jet********");
 		System.out.println("Which type of Jet: ");
 		System.out.println("F = Fighter");
 		System.out.println("C = Cargo");
 		System.out.println("P = Passenger");
-		char type = input.next().toUpperCase().charAt(0);
+		type = input.next().toUpperCase().charAt(0);
+		input.nextLine();
+		if(type == 'C' || type == 'F' || type == 'P')
+		{
+			break;
+		}
+		else {
+			System.err.println("ERROR - Invalid Aircraft Type. F/C/P ONLY. Try again.");
+		}
+		} while(true);
 
 		System.out.print("Enter Model: ");
 		String model = input.nextLine();
@@ -197,6 +231,7 @@ public class JetsApplication {
 
 			// add the jet an ArrayList of jets
 			airField.setJets(j);
+		}
 
 	}
 

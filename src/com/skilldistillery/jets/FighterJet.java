@@ -21,11 +21,11 @@ public class FighterJet extends Jet implements CombatReady{
 	public void fight() {
 		System.out.println("Initiating Dogfight...");
 		System.out.print(super.toString());
-		System.out.println("\nManeuver: 4g Inverted Dive\nDistance to Mig28: 2 meters");
-		System.out.println("Communicating with enemy: Flip him the bird & take a Polaroid");
-		System.out.println("Moving to his six....");
-		System.out.println("Too close for missles. Switching to Guns!");
-		System.out.println("Enemy DESTROYED!!!!");
+		System.out.println("\tManeuvering:\t4g Inverted Dive\n\tDistance:\t2 meters");
+		System.out.println("\tCommunicating:\tFlip him the bird & take a Polaroid");
+		System.out.println("\tMoving to his six....");
+		System.out.println("\t\tToo close for missles. Switching to Guns!");
+		System.out.println("\t\tEnemy DESTROYED!!!!\n");
 
 	}
 	

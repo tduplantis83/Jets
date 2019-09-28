@@ -1,8 +1,7 @@
 package com.skilldistillery.jets;
 
-public class PassengerJet extends Jet implements CarryPassengers{
-	
-	
+public class PassengerJet extends Jet implements PassengerCarrier {
+
 	public PassengerJet() {
 		super();
 	}
@@ -10,7 +9,7 @@ public class PassengerJet extends Jet implements CarryPassengers{
 	public PassengerJet(String model, double speed, int range, long price, char jetType) {
 		super(model, speed, range, price, jetType);
 	}
-	
+
 	public void fly() {
 		// prints out all fields
 		// prints time the jet can fly before running out of fuel
@@ -20,7 +19,9 @@ public class PassengerJet extends Jet implements CarryPassengers{
 
 	@Override
 	public void loadPassengers() {
-		System.out.println("Welcome passengers. We will now begin boarding at gate A13...");
+		System.out.println("Welcome passengers of:");
+		System.out.print(super.toString());
+		System.out.println("We will now begin boarding at gate A13...");
 		System.out.println("First Class passengers may begin boarding at this time.");
 		System.out.println(".........");
 		System.out.println("If you're a Senior, or are traveling with small children, please step forward to board the plane.");
@@ -30,12 +31,11 @@ public class PassengerJet extends Jet implements CarryPassengers{
 		System.out.println("We will now begin general passenger boarding.");
 		System.out.println(".........");
 		System.out.println("Final call for all passengers at gate A13.");
-		System.out.println("Boarding Complete...Retracting jetway.");
+		System.out.println("Boarding Complete...Retracting jetway.\n");
 	}
-	
+
 	public String toString() {
 		return super.toString();
 	}
-	
-	
+
 }

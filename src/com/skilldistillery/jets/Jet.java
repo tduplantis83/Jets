@@ -1,11 +1,15 @@
 package com.skilldistillery.jets;
 
+import java.text.NumberFormat;
+
 public abstract class Jet {
 	private String model;
 	private double speed;
+	private double mach;
 	private int range;
 	private long price;
 	private char jetType;
+	NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 	public Jet() {
 
@@ -35,6 +39,15 @@ public abstract class Jet {
 	
 	public void setSpeed(double speed) {
 		this.speed = speed;
+	}
+	
+	private void setMach() {
+		this.mach = this.speed * 0.001303;
+	}
+	
+	public double getMach() {
+		setMach();
+		return this.mach;
 	}
 	
 	public int getRange() {
@@ -68,17 +81,23 @@ public abstract class Jet {
 
 	@Override
 	public String toString() {
+		//format speed for output
+		String fmtSpeed = String.format("%.0f", speed);
+		String fmtMach = String.format("%.4f", getMach());
+		
 		StringBuilder builder = new StringBuilder();
 		builder.append("Model:\t");
 		builder.append(model);
 		builder.append("\nSpeed:\t");
-		builder.append(speed);
-		builder.append(" MPH");
+		builder.append(fmtSpeed);
+		builder.append(" MPH / ");
+		builder.append(fmtMach); 
+		builder.append(" Mach");
 		builder.append("\nRange:\t");
 		builder.append(range);
 		builder.append(" Nautical Miles");
 		builder.append("\nPrice:\t");
-		builder.append("$" + price);
+		builder.append(nf.format(price));
 		if(jetType == 'C') {
 			builder.append("\nType:\tCargo\n");
 		}
