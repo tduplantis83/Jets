@@ -5,16 +5,18 @@ public abstract class Jet {
 	private double speed;
 	private int range;
 	private long price;
+	private char jetType;
 
 	public Jet() {
 
 	}
 
-	public Jet(String model, double speed, int range, long price) {
+	public Jet(String model, double speed, int range, long price, char jetType) {
 		this.model = model;
 		this.speed = speed;
 		this.range = range;
 		this.price = price;
+		this.jetType = jetType;
 	}
 
 	public abstract void fly();
@@ -51,23 +53,45 @@ public abstract class Jet {
 		this.price = price;
 	}
 	
+	public char getJetType() {
+		return jetType;
+	}
+	
+	public void setJetType(char jetType) {
+		this.jetType = jetType;
+	}
+	
 	public double getSpeedInMach() {
 		
 		return 0.0;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Model: ");
+		builder.append("Model:\t");
 		builder.append(model);
-		builder.append(", Top Speed (MPH): ");
+		builder.append("\nSpeed:\t");
 		builder.append(speed);
-		builder.append(", Range (Miles): ");
+		builder.append(" MPH");
+		builder.append("\nRange:\t");
 		builder.append(range);
-		builder.append(", Price: ");
-		builder.append(price);
+		builder.append(" Nautical Miles");
+		builder.append("\nPrice:\t");
+		builder.append("$" + price);
+		if(jetType == 'C') {
+			builder.append("\nType:\tCargo\n");
+		}
+		else if(jetType == 'F') {
+			builder.append("\nType:\tFighter\n");
+		}
+		else {
+			builder.append("\nType:\tPassenger\n");
+		}
+		
 		return builder.toString();
 	}
+	
+	
 	
 }
