@@ -107,14 +107,6 @@ public class AirField {
 			}
 		}
 	}
-	
-	public void save(String fileName) throws FileNotFoundException {
-        PrintWriter pw = new PrintWriter(new FileOutputStream(fileName));
-        for (Jet jet : jets) {
-            pw.println(jet.getModel() + ", " + jet.getSpeed() + ", " + jet.getRange() + ", " + jet.getPrice());
-        }
-        pw.close();
-    }
 
 	public void saveFleet(PrintWriter pw, FileOutputStream fos) throws FileNotFoundException{
 		try {

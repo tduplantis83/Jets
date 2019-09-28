@@ -5,56 +5,71 @@ Course Began: 9/9/19
 
 Assigned: 9/27/19
 
-Completed:
+Completed: 9/28/19
 
 
 ### Overview
+This application creates an airfield, which holds a fleet of jets. There are several types of jets, each with different capabilities. The application also displays a menu for users, with options for them to complete.
 
+The purpose of this exercise is to incorporate all that we've learned in the course during our first 3 weeks, with a focus on Object-Oriented Programming and it's four pillars: Abstraction, Polymorphism, Inheritance, and Encapsulation.
+
+Upon starting the app, a fleet of several jets are imported from an existing text file. The user is then presented with a (self-explanatory) menu, allowing them to: List the entire fleet, Fly all Jets, View the Fastest Jet, View Jet with Longest Range, Load all Cargo Jets, Load all Passenger Jets, Dogfight!!!!, Add a Jet to the Fleet, Remove a Jet from the Fleet, Save Jet Fleet to a text file, or Quit the application.
 
 ### How to run
 This is a console app:
-1. Compile and run it in Terminal, an IDE, etc.
-2. Enter data as requested, & make the appropriate menu choices.
+1. Compile and run it in Terminal, any IDE, etc.
+2. Make Menu selections/enter data as requested.
+3. Quit via the Menu
 
 ### Technologies/Topics Used
-1. java.util.Scanner
-2. Arrays
-3. Objects/Classes
-4. Encapsulation
-5. data types:
+1. Object-Oriented Programming:
+    *Abstraction
+    *Polymorphism
+    *Inheritance
+    *Encapsulation
 
+2. Eclipse Interactive Debugger
+3. Field & Method Visibility
+3. java.util.Scanner
+4. PrintWriter
+5. BufferedReader
+6. Collections:
+    *ArrayList
+7. Arrays
+8. Primitive data types:
   *double
-
   *boolean
-
   *int
-
   *String
 
-6. conversions:
+9. Non-Primitive types:
+  *Wrapper Classes
+  *Objects
+  *Interfaces
 
+10. Conversions:
   *implicit
-
   *explicit
-
   *promotions
 
-7. loops:
+11. Exceptions
+  *Try/Catch/Finally
 
+12. loops:
   *do while
-
-  *break
-
   *for
+  *for each
 
-8. conditionals:
+13. conditionals:
+  *if/else if/else
 
-  *if/else
+14. arithmetic/calculations
+15. Methods:
+  *Overloads
+  *Overrides
 
-7. arithmetic/calculations
-8. Methods (with parameters & return values)
 
 ### Lessons Learned
-I learned that if you don't force Scanner to take a nextLine() after taking nextInt(),that it will skip your input completely because nextInt() doesn't take the carriage return.
+As with the other projects so far, this one reinforced the importance of planning before coding. Taking time to think through the application, create even a basic UML diagram, and stubbing out classes and methods, saves a great deal of time overall.
 
-I learned that it is much easier to complete the program by first deciding exactly what needs to be done, and then stubbing out methods to do those things, and finally filling in the methods with the appropriate logic one at a time.
+In the future, I would like to begin learning and utilizing Test Driven Development very intensely, in an effort to save time, while also making future modifications simpler.  

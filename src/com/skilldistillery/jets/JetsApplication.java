@@ -35,6 +35,8 @@ public class JetsApplication {
 		
 		
 		input.close();
+		
+		System.exit(0);
 
 	}
 
@@ -168,7 +170,7 @@ public class JetsApplication {
 		// passenger plane
 		else if (jet[4].charAt(0) == 'P') {
 			PassengerJet j = new PassengerJet(jet[0], Double.parseDouble(jet[1]), Integer.parseInt(jet[2]),
-					Long.parseLong(jet[3]), (jet[4].charAt(0)));
+					Long.parseLong(jet[3]), jet[4].charAt(0));
 
 			// add the jet an ArrayList of jets
 			airField.setJets(j);
@@ -180,25 +182,27 @@ public class JetsApplication {
 	private void addJet() {
 		String [] jet = new String[5];
 		
-		System.out.println("*********Create a new jet********");
-		System.out.println("Which type of Jet: ");
-		System.out.println("F = Fighter");
-		System.out.println("C = Cargo");
-		System.out.println("P = Passenger");
-		jet[4] = input.next();
 		input.nextLine();
-
+		System.out.println("*********Create a new jet********");
 		System.out.print("Enter Model: ");
 		jet[0] = input.nextLine();
 
 		System.out.print("Enter Speed: ");
-		jet[1]= input.nextLine();
+		jet[1] = input.nextLine();
 
 		System.out.print("Enter Range: ");
-		jet[2] = input.nextLine();
-		
+		jet[2]= input.nextLine();
+
 		System.out.print("Enter Price: ");
 		jet[3] = input.nextLine();
+		
+		System.out.println("Which type of Jet: ");
+		System.out.println("F = Fighter");
+		System.out.println("C = Cargo");
+		System.out.println("P = Passenger");
+		jet[4] = input.nextLine().toUpperCase();
+		
+		
 		
 		createJet(jet);
 
