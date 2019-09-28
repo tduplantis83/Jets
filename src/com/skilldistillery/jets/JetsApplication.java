@@ -98,11 +98,11 @@ public class JetsApplication {
 			printJets();
 			airField.removeJet(input);
 			return true;
-		case 's':
-		case 'S':
-			System.out.println("Saving Current Fleet to jetFleetOutput.txt...");
-			airField.saveFleet(pw, fw);
-			return true;
+//		case 's':
+//		case 'S':
+//			System.out.println("Saving Current Fleet to jetFleetOutput.txt...");
+//			airField.saveFleet(pw, fw);
+//			return true;
 		case 'q':
 		case 'Q':
 			System.out.println("Quitting Application - Fly Safe!");
