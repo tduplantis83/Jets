@@ -1,8 +1,8 @@
 Grumman F-14 Tomcat, 1544.0, 1841, 38000000, F
 Boeing 737, 564.0, 3850, 74000000, P
 Lockheed AC-130, 299.0, 2529, 132400000, C
-Boeing F-16 Super Hornet, 1190.0, 1275, 70500000, F
 Boeing 777, 644.0, 8555, 320000000, P
 Airbus A300-600ST Beluga, 483.0, 2500, 200220849, C
 Lockheed Martin F-22 Raptor, 1498.0, 1839, 150000000, F
 Antonov An-225 Mriya, 528.0, 9569, 250000000, C
+SR-71 Blackbird, 2193.0, 3355, 75000000, F
