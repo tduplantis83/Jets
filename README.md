@@ -1,6 +1,6 @@
-## Food Trucks Project
+## Jets Project
 
-### Second week homework for Skill Distillery
+### Third week homework for Skill Distillery
 Course Began: 9/9/19
 
 Assigned: 9/27/19

@@ -73,11 +73,12 @@ public class AirField {
 
 		for (index = 0; index < jets.size(); index++) {
 			if (jets.get(index).getModel().equalsIgnoreCase(model)) {
-				matchFound = 1;
+				matchFound++;
 				break;
 			}
 		}
 
+		//1 match was found - exact name
 		if (matchFound > 0) {
 			do {
 				System.out.println("Match found - Are you sure you'd like to delete the \n" + "following jet? (Y/N)");
@@ -94,7 +95,9 @@ public class AirField {
 					System.err.println("\nERROR - Invalid Input. Try again.\n");
 				}
 			} while (confirm != 'Y' && confirm != 'N');
-		} else {
+		} 
+		//no match was found
+		else {
 			System.out.println("No Jet with the exact Model name was found.");
 		}
 
